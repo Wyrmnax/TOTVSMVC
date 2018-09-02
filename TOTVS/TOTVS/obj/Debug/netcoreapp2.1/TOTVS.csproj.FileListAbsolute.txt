@@ -39,3 +39,9 @@ C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\Razor\Views\Pedidos\Delete.
 C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\Razor\Views\Pedidos\Details.g.cshtml.cs
 C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\Razor\Views\Pedidos\Edit.g.cshtml.cs
 C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\Razor\Views\Pedidos\Index.g.cshtml.cs
+C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\Razor\Views\Produtos\Create.g.cshtml.cs
+C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\Razor\Views\Produtos\Delete.g.cshtml.cs
+C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\Razor\Views\Produtos\Details.g.cshtml.cs
+C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\Razor\Views\Produtos\Edit.g.cshtml.cs
+C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\Razor\Views\Produtos\Index.g.cshtml.cs
+C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\TOTVS.csprojAssemblyReference.cache

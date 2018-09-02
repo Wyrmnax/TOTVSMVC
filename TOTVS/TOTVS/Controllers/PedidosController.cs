@@ -79,7 +79,11 @@ namespace TOTVS.Controllers
                 return NotFound();
             }
 
-            var pedido = await _context.Pedidos.FindAsync(id);
+            var pedido = await _context.Pedidos
+                .Include(p => p.Cliente)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.ID == id);
+
             if (pedido == null)
             {
                 return NotFound();
@@ -90,36 +94,42 @@ namespace TOTVS.Controllers
         // POST: Pedidos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ClienteID,ValorTotal,DataPedido")] Pedido pedido)
+        public async Task<IActionResult> EditPost(int? id)
         {
-            if (id != pedido.ID)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var pedidoToUpdate = await _context.Pedidos
+                .Include(p => p.Cliente)
+                .SingleOrDefaultAsync(s => s.ID == id);
+
+            if (await TryUpdateModelAsync<Pedido>(
+                pedidoToUpdate,
+                "",
+                i => i.ID, i => i.DataPedido))
             {
+                if (string.IsNullOrWhiteSpace(pedidoToUpdate.Cliente?.Nome))
+                {
+                    pedidoToUpdate.Cliente = null;
+                }
                 try
                 {
-                    _context.Update(pedido);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException /* ex */)
                 {
-                    if (!PedidoExists(pedido.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(pedido);
+            return View(pedidoToUpdate);
         }
 
         // GET: Pedidos/Delete/5
