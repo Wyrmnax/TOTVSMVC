@@ -1,0 +1,59 @@
+﻿@model TOTVS.Models.ViewModels.PedidoIndexData
+
+@{
+    ViewData["Title"] = "Pedidos";
+}
+
+<h2>Pedidos</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numero</th>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Valor Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pedidos)
+        {
+            string selectedRow = "";
+            if (item.ID == (int?)ViewData["InstructorID"])
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClienteID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataPedido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorTotal)
+                </td>
+                <td>
+                    @{
+                        foreach (var pedido in item.ProdutoPedidos)
+                        {
+                            @pedido.Produto.ID @:  @pedido.Produto.Descricao <br />
+                        }
+                    }
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

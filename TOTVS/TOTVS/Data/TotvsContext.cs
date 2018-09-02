@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TOTVS.Models;
 
 namespace TOTVS.Data
@@ -23,7 +19,8 @@ namespace TOTVS.Data
             modelBuilder.Entity<Cliente>().ToTable("Cliente");
             modelBuilder.Entity<Produto>().ToTable("Produto");
             modelBuilder.Entity<Pedido>().ToTable("Pedido");
-            modelBuilder.Entity<ProdutoPedido>().ToTable("ProdutoPedido").HasKey(c => new { c.PedidoID, c.ProdutoID });
+            modelBuilder.Entity<ProdutoPedido>().ToTable("ProdutoPedido");
+            modelBuilder.Entity<ProdutoPedido>().HasKey(c => new { c.PedidoID, c.ProdutoID });
         }
     }
 }

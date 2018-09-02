@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TOTVS.Models
 {
@@ -10,5 +7,7 @@ namespace TOTVS.Models
         public int ID { get; set; }
         public string Descricao { get; set; }
         public float ValorIndividual { get; set; }
+
+        public ICollection<ProdutoPedido> ProdutoPedidos { get; set; }
     }
 }
