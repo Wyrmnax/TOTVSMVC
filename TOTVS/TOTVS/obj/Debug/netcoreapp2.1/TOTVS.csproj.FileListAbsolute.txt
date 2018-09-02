@@ -5,7 +5,6 @@ C:\Code\TOTVSMVC\TOTVS\TOTVS\bin\Debug\netcoreapp2.1\TOTVS.dll
 C:\Code\TOTVSMVC\TOTVS\TOTVS\bin\Debug\netcoreapp2.1\TOTVS.pdb
 C:\Code\TOTVSMVC\TOTVS\TOTVS\bin\Debug\netcoreapp2.1\TOTVS.Views.dll
 C:\Code\TOTVSMVC\TOTVS\TOTVS\bin\Debug\netcoreapp2.1\TOTVS.Views.pdb
-C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\TOTVS.csprojAssemblyReference.cache
 C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\TOTVS.csproj.CoreCompileInputs.cache
 C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\TOTVS.RazorAssemblyInfo.cache
 C:\Code\TOTVSMVC\TOTVS\TOTVS\obj\Debug\netcoreapp2.1\TOTVS.RazorAssemblyInfo.cs

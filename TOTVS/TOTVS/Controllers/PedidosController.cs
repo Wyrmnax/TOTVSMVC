@@ -23,6 +23,7 @@ namespace TOTVS.Controllers
             var viewModel = new PedidoIndexData();
 
             viewModel.Pedidos = await _context.Pedidos
+                .Include(p => p.Cliente)
                 .Include(p => p.ProdutoPedidos)
                 .ThenInclude(p => p.Produto)
                 .ToListAsync();

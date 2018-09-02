@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TOTVS.Models
 {
@@ -9,6 +7,7 @@ namespace TOTVS.Models
     {
         public int ID { get; set; }
         public int? ClienteID { get; set; }
+        public Cliente Cliente { get; set; }
         public double ValorTotal { get; set; }
         public DateTime DataPedido { get; set; }
 

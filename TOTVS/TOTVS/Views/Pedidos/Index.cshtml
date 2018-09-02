@@ -31,7 +31,7 @@
                     @Html.DisplayFor(modelItem => item.ID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ClienteID)
+                    @Html.DisplayFor(modelItem => item.Cliente.Nome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DataPedido)
@@ -43,7 +43,7 @@
                     @{
                         foreach (var pedido in item.ProdutoPedidos)
                         {
-                            @pedido.Produto.ID @:  @pedido.Produto.Descricao <br />
+                            @pedido.Quantidade @:  @pedido.Produto.Descricao @pedido.Produto.ValorIndividual <br />
                         }
                     }
                 </td>
