@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOTVS", "TOTVS\TOTVS.csproj", "{607E707D-0555-4C47-80F0-CCDE078EF13C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{607E707D-0555-4C47-80F0-CCDE078EF13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{607E707D-0555-4C47-80F0-CCDE078EF13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{607E707D-0555-4C47-80F0-CCDE078EF13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{607E707D-0555-4C47-80F0-CCDE078EF13C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1DFDAFA-0149-459D-AF3B-72F8CE321F08}
+	EndGlobalSection
+EndGlobal
