@@ -16,12 +16,14 @@ namespace TOTVS.Data
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<ProdutoPedido> ProdutoPedidos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cliente>().ToTable("Cliente");
             modelBuilder.Entity<Produto>().ToTable("Produto");
             modelBuilder.Entity<Pedido>().ToTable("Pedido");
+            modelBuilder.Entity<ProdutoPedido>().ToTable("ProdutoPedido").HasKey(c => new { c.PedidoID, c.ProdutoID });
         }
     }
 }

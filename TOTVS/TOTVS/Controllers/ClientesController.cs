@@ -34,7 +34,10 @@ namespace TOTVS.Controllers
             }
 
             var cliente = await _context.Clientes
+                .Include(s => s.Pedidos)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
+
             if (cliente == null)
             {
                 return NotFound();

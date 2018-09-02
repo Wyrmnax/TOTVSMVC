@@ -22,6 +22,32 @@
         <dd>
             @Html.DisplayFor(model => model.CPF)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pedidos)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Numero Pedido</th>
+                    <th>Data Pedido</th>
+                    <th>Valor Total</th>
+                </tr>
+                @foreach (var item in Model.Pedidos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataPedido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorTotal)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <div>

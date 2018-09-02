@@ -12,6 +12,6 @@ namespace TOTVS.Models
         public double ValorTotal { get; set; }
         public DateTime DataPedido { get; set; }
 
-        public ICollection<Produto> Produtos { get; set; }
+        public ICollection<ProdutoPedido> ProdutoPedidos { get; set; }
     }
 }
