@@ -90,7 +90,20 @@ namespace TOTVS.Controllers
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
 
+            var produtos = await _context.Produtos
+                .Include(p => p.ProdutoPedidos)
+                .AsNoTracking()
+                .ToListAsync();
+
+            var produtosPedidos = await _context.ProdutoPedidos
+                .Where(s => s.PedidoID == id)
+                .Include(s => s.Produto)
+                .AsNoTracking()
+                .ToListAsync();
+
             pedidosEdit.Pedido = pedido;
+            pedidosEdit.Produtos = produtos;
+            pedidosEdit.ProdutoPedidos = produtosPedidos;
 
             if (pedidosEdit.Pedido == null)
             {

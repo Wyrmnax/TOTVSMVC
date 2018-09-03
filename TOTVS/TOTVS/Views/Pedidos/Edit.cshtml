@@ -29,6 +29,25 @@
                 <span asp-validation-for="Pedido.DataPedido" class="text-danger"></span>
             </div>
 
+            <h3>Lista Produtos</h3>
+            <table cellpadding="2" cellspacing="2" border="1">
+                <tr>
+                    <th> ID </th>
+                    <th> Descricao </th>
+                    <th> Valor Individual </th>
+                    <th> Quantidade </th>
+                </tr>
+                @foreach (var produtoPedido in Model.ProdutoPedidos)
+                {
+                    <tr>
+                        <td>@produtoPedido.Produto.ID</td>
+                        <td>@produtoPedido.Produto.Descricao</td>
+                        <td>@produtoPedido.Produto.ValorIndividual</td>
+                        <td>@produtoPedido.Quantidade </td>
+                    </tr>
+                }
+            </table>
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <table>
