@@ -7,6 +7,6 @@
         public Produto Produto { get; set; }
         public Pedido Pedido { get; set; }
 
-        public int Quantidade { get; set; }
+        public int? Quantidade { get; set; }
     }
 }

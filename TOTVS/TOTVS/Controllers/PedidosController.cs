@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TOTVS.Data;
@@ -79,24 +81,51 @@ namespace TOTVS.Controllers
                 return NotFound();
             }
 
+            var pedidosEdit = new PedidoEditData() { };
+
             var pedido = await _context.Pedidos
                 .Include(p => p.Cliente)
+                .Include(p => p.ProdutoPedidos)
+                .ThenInclude(p => p.Produto)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.ID == id);
 
-            if (pedido == null)
+            pedidosEdit.Pedido = pedido;
+
+            if (pedidosEdit.Pedido == null)
             {
                 return NotFound();
             }
-            return View(pedido);
+            PopulateAssignedPedidoData(pedidosEdit.Pedido);
+
+            pedidosEdit.ListaClientes = new SelectList(_context.Clientes.ToList(), "ID", "Nome");
+
+            return View(pedidosEdit);
+        }
+
+        private void PopulateAssignedPedidoData(Pedido pedido)
+        {
+            var allProdutos = _context.Produtos;
+            var pedidoProduto = new HashSet<int>(pedido.ProdutoPedidos.Select(c => c.ProdutoID));
+            var viewModel = new List<AssignedPedidoData>();
+            foreach (var produto in allProdutos)
+            {
+                viewModel.Add(new AssignedPedidoData
+                {
+                    ProdutoID = produto.ID,
+                    Descricao = produto.Descricao,
+                    Assigned = pedidoProduto.Contains(produto.ID)
+                });
+            }
+            ViewData["Produtos"] = viewModel;
         }
 
         // POST: Pedidos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> Edit(int? id, string[] selectedProdutos, int? SelectedUserID)
         {
             if (id == null)
             {
@@ -105,17 +134,24 @@ namespace TOTVS.Controllers
 
             var pedidoToUpdate = await _context.Pedidos
                 .Include(p => p.Cliente)
+                .Include(p => p.ProdutoPedidos)
+                .ThenInclude(p => p.Produto)
                 .SingleOrDefaultAsync(s => s.ID == id);
 
             if (await TryUpdateModelAsync<Pedido>(
                 pedidoToUpdate,
                 "",
-                i => i.ID, i => i.DataPedido))
+                i => i.ID, i => i.DataPedido, i => i.ClienteID))
             {
                 if (string.IsNullOrWhiteSpace(pedidoToUpdate.Cliente?.Nome))
                 {
                     pedidoToUpdate.Cliente = null;
                 }
+                UpdatePedidoProdutos(selectedProdutos, pedidoToUpdate);
+
+                pedidoToUpdate.ClienteID = SelectedUserID;
+                //var resultData = _context.Clientes.Select(c => c.ID == ListaClientes.SelectedValue);
+
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -129,7 +165,41 @@ namespace TOTVS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            UpdatePedidoProdutos(selectedProdutos, pedidoToUpdate);
+            PopulateAssignedPedidoData(pedidoToUpdate);
             return View(pedidoToUpdate);
+        }
+
+        private void UpdatePedidoProdutos(string[] selectedProdutos, Pedido pedidoToUpdate)
+        {
+            if (selectedProdutos == null)
+            {
+                pedidoToUpdate.ProdutoPedidos = new List<ProdutoPedido>();
+                return;
+            }
+
+            var selectedProdutosHS = new HashSet<string>(selectedProdutos);
+            var pedidoProdutos = new HashSet<int>
+                (pedidoToUpdate.ProdutoPedidos.Select(c => c.Produto.ID));
+            foreach (var produto in _context.Produtos)
+            {
+                if (selectedProdutosHS.Contains(produto.ID.ToString()))
+                {
+                    if (!pedidoProdutos.Contains(produto.ID))
+                    {
+                        pedidoToUpdate.ProdutoPedidos.Add(new ProdutoPedido { PedidoID = pedidoToUpdate.ID, ProdutoID = produto.ID });
+                    }
+                }
+                else
+                {
+                    if (pedidoProdutos.Contains(produto.ID))
+                    {
+                        ProdutoPedido produtoToRemove = pedidoToUpdate.ProdutoPedidos.SingleOrDefault(i => i.ProdutoID == produto.ID);
+                        _context.Remove(produtoToRemove);
+                    }
+                }
+            }
         }
 
         // GET: Pedidos/Delete/5

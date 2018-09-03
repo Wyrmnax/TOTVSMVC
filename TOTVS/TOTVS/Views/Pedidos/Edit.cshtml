@@ -1,4 +1,4 @@
-﻿@model TOTVS.Models.Pedido
+﻿@model TOTVS.Models.ViewModels.PedidoEditData
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,33 +12,62 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
+            <input type="hidden" asp-for="Pedido.ID" />
             <div class="form-group">
-                <label asp-for="Cliente.Nome" class="control-label"></label>
-                <select asp-for="Cliente.Nome" class="form-control" asp-items="ViewBag.ClienteID"></select>
-                <span asp-validation-for="Cliente.Nome" class="text-danger"></span>
+                @Html.LabelFor(m => m.SelectedUserID)
+                @Html.DropDownListFor(m => m.SelectedUserID, Model.ListaClientes, "Cliente")
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Pedido.ValorTotal" class="control-label"></label>
+                <input asp-for="Pedido.ValorTotal" class="form-control" />
+                <span asp-validation-for="Pedido.ValorTotal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ValorTotal" class="control-label"></label>
-                <input asp-for="ValorTotal" class="form-control" />
-                <span asp-validation-for="ValorTotal" class="text-danger"></span>
+                <label asp-for="Pedido.DataPedido" class="control-label"></label>
+                <input asp-for="Pedido.DataPedido" class="form-control" />
+                <span asp-validation-for="Pedido.DataPedido" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="DataPedido" class="control-label"></label>
-                <input asp-for="DataPedido" class="form-control" />
-                <span asp-validation-for="DataPedido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+                <div class="col-md-offset-2 col-md-10">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                List<TOTVS.Models.ViewModels.AssignedPedidoData> produtos = ViewBag.Produtos;
+
+                                foreach (var produto in produtos)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedCourses"
+                                               value="@produto.ProdutoID."
+                                               @(Html.Raw(produto.Assigned ? "checked=\"checked\"" : "")) />
+                                        @produto.ProdutoID @:  @produto.Descricao
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -16,6 +16,7 @@
             <th>Cliente</th>
             <th>Data</th>
             <th>Valor Total</th>
+            <th>Produtos</th>
         </tr>
     </thead>
     <tbody>
@@ -43,7 +44,7 @@
                     @{
                         foreach (var pedido in item.ProdutoPedidos)
                         {
-                            @pedido.Quantidade @:  @pedido.Produto.Descricao @pedido.Produto.ValorIndividual <br />
+                            @pedido.Quantidade @:  @pedido.Produto.Descricao <br />
                         }
                     }
                 </td>

@@ -1,6 +1,6 @@
 ﻿using System;
-using TOTVS.Models;
 using System.Linq;
+using TOTVS.Models;
 
 namespace TOTVS.Data
 {
@@ -66,8 +66,8 @@ namespace TOTVS.Data
             new ProdutoPedido{ProdutoID=1,PedidoID=3,Quantidade=5},
             new ProdutoPedido{ProdutoID=2,PedidoID=2,Quantidade=65},
             new ProdutoPedido{ProdutoID=3,PedidoID=1,Quantidade=2},
-            new ProdutoPedido{ProdutoID=1,PedidoID=2,Quantidade=65},
-            new ProdutoPedido{ProdutoID=4,PedidoID=3,Quantidade=5},
+            new ProdutoPedido{ProdutoID=1,PedidoID=2,Quantidade=62},
+            new ProdutoPedido{ProdutoID=4,PedidoID=3,Quantidade=8},
             new ProdutoPedido{ProdutoID=4,PedidoID=5,Quantidade=235}
             };
             foreach (ProdutoPedido e in produtopeditos)
